@@ -83,6 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_email = trim($_POST["email"]);
             
             // Attempt to execute the prepared statement
+<<<<<<< HEAD
             if(mysqli_stmt_execute($stmt)){
                 /* store result */
                 mysqli_stmt_store_result($stmt);
@@ -93,6 +94,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $email = trim($_POST["email"]);
                 }
             } else{
+=======
+            if(mysqli_stmt_execute($stmt))
+			{
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) == 1)
+				{
+                    $email_err = "This E-Mail address is already taken.";
+                } 
+				else
+				{
+                    $email = trim($_POST["email"]);
+               
+			    }
+			}   
+			   else
+			{
+>>>>>>> 327d380028e9918d3bc18b430e40dc875ebb6b67
                 echo "Oops! Something went wrong. Please try again later.";
             }
 

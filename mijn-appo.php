@@ -151,7 +151,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <main class="wrap">
             <section>
                 <h3>Mijn appo</h3>
+<<<<<<< HEAD
                 <p>Wij hebben een persoonlijke omgeving voor klanten waar zij op kunennen inloggen. Zo kunt u zelf uw zaken regelen!</p>
+=======
+                <p>Wij hebben een persoonlijke omgeving voor klanten waar zij op kunnen inloggen. Zo kunt u zelf uw zaken regelen!</p>
+>>>>>>> 327d380028e9918d3bc18b430e40dc875ebb6b67
             </section>
             <section>
                 <h5>Inloggen</h5>
@@ -173,7 +177,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					
                 </form> 
                 <hr>
+<<<<<<< HEAD
                 <a href="#">Wachtwoord vergeten?</a>
+=======
+                <a href="forgotpassword.php">Wachtwoord vergeten?</a>
+>>>>>>> 327d380028e9918d3bc18b430e40dc875ebb6b67
             </section>
         </main>
         <?php include 'assets/includes/footer.php'?>
