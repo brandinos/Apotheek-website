@@ -27,12 +27,11 @@ else
             rel="stylesheet"
             href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
         />
-        <link rel="preload" href="./assets/css/style.css" as="style" />
-        <link rel="stylesheet" href="./assets/css/style.css" />
+        <link rel="preload" href="assets/css/style.css" as="style" />
+        <link rel="stylesheet" href="assets/css/style.css" />
         <title>Apotheek Schut</title>
     </head>
     <body>
-    <p>patatjes</p>
         <?php 
 			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
 			{
