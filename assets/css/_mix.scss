@@ -1,0 +1,13 @@
+/* kan gebruikt worden in de html zonder dat je @media moet doen,
+ipv daar van doe je @include tablet, veel makerlijker */
+@mixin tablet {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media screen and (max-width: 280px) {
+        @content;
+    }
+}
