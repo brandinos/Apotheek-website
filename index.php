@@ -32,6 +32,7 @@ else
         <title>Apotheek Schut</title>
     </head>
     <body>
+    <p>patatjes</p>
         <?php 
 			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
 			{
