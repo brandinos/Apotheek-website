@@ -12,5 +12,3 @@ if($conn == false)
 	die("COULD NOT CONNECT. " .mysqli_connect_error());
 }
 ?>
-
-JEMOEDER! hahahahaa
