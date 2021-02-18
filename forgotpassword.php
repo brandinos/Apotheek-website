@@ -39,7 +39,7 @@ if(empty(trim($_POST["email"])))
 			// Prepare a select statement
 
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html>test
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
