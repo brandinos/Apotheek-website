@@ -120,7 +120,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                     $email_err = "An email has been sent to this email address if an activated account exists for it";
                                 }
                                 // Redirect to login page
+                                /*
                                 header("location: mijn-appo.php");
+                                */
                             }
                         }
                         else
