@@ -25,13 +25,15 @@ $activation_status = "";
 $activation_status_err = "";
 $current_datetime = "";
  
-// Validate email address
-if(empty(trim($_POST["email"])))
+if($_SERVER["REQUEST_METHOD"] == "POST")
 {
+    // Validate email address
+    if(empty(trim($_POST["email"])))
+    {
 		$email_err = "Please enter an E-Mail address";
-}
-else
-{
+    }
+    else
+    {
 		$email = trim($_POST["email"]);
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL))
 		{
@@ -76,7 +78,7 @@ else
                                     // Bind variables to the prepared statement as parameters
                                     mysqli_stmt_bind_param($stmt, "ss", $param_random_hash, $param_current_datetime);
                                     // Set parameters
-                                    $param_random_hash = password_hash($password, PASSWORD_DEFAULT); // Creates a hash for the reset string
+                                    $param_random_hash = password_hash($random_hash, PASSWORD_DEFAULT); // Creates a hash for the reset string
                                     $param_current_datetime = $current_datetime; 
                                 }
                                 // Attempt to execute the prepared statement
@@ -116,6 +118,8 @@ else
                                 {
                                     $email_err = "An email has been sent to this email address if an activated account exists for it";
                                 }
+                                // Redirect to login page
+                                header("location: mijn-appo.php");
                             }
                         }
                         else
@@ -127,9 +131,11 @@ else
             // Close statement
             mysqli_stmt_close($stmt);  
             }
-    }   
-    // Close statement
-    mysqli_stmt_close($stmt);
+        }   
+        // Close connection
+        mysqli_close($conn);
+
+    }    
 }         
 ?>
        

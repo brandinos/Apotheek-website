@@ -151,12 +151,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check input errors before inserting in database
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($confirm_email_err)){
         
-		//Create activation code
+		//Create validation hash
 		$random_hash = md5(uniqid(rand(), true));
         // Prepare an insert statement
         $sql = "INSERT INTO login (username, password, email, activation_code) VALUES (?, ?, ?, ?)";
          
-        if($stmt = mysqli_prepare($conn, $sql)){
+        if($stmt = mysqli_prepare($conn, $sql))
+        {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_email, $param_random_hash);
             
@@ -189,7 +190,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					// Content
 					$mail->isHTML(true);                                  // Set email format to HTML
 					$mail->Subject = 'Account verification';
-					$mail->Body    = "http://localhost/example/projectapotheek/verification.php?passkey=$random_hash";
+					$mail->Body    = "http://localhost/example/Apotheek-website/verification.php?passkey=$random_hash";
 					// Send mail
 					$mail->send();
 					echo 'Message has been sent';
