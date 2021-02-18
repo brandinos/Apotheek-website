@@ -42,10 +42,10 @@ CREATE TABLE `login` (
 -- Gegevens worden geëxporteerd voor tabel `login`
 --
 
-INSERT INTO `login` (`id`, `username`, `password`, `email`, `activation_code`, `activation_status`, `forgot_password_code`, `forgot_password_time`) VALUES
-(7, 'haha', 'hihi', 'hoho', '', 0, '', '0000-00-00 00:00:00.000000'),
-(37, 'ItzDylan', '$2y$10$GXG6kpOHTKhtUYlZLHIfv.7mcQFLWUpoMUxlPOWJN9Hh./93fxpPu', 'dylan-dylan99@hotmail.com', '7fe24e6a9870ba2a4eb6731c26bd416c', 1, '', '0000-00-00 00:00:00.000000'),
-(46, 'qwerty', '$2y$10$kqz/26Gc4KN4/itBYgcAyuBkLICoyZlKQZNxDSoymIyoCJk2euT8m', 'dylan99@quicknet.nl', '', 1, '', '0000-00-00 00:00:00.000000');
+    INSERT INTO `login` (`id`, `username`, `password`, `email`, `activation_code`, `activation_status`, `forgot_password_code`, `forgot_password_time`) VALUES
+    (7, 'haha', 'hihi', 'hoho', '', 0, '', '0000-00-00 00:00:00.000000'),
+    (37, 'ItzDylan', '$2y$10$GXG6kpOHTKhtUYlZLHIfv.7mcQFLWUpoMUxlPOWJN9Hh./93fxpPu', 'dylan-dylan99@hotmail.com', '7fe24e6a9870ba2a4eb6731c26bd416c', 1, '', '0000-00-00 00:00:00.000000'),
+    (46, 'qwerty', '$2y$10$kqz/26Gc4KN4/itBYgcAyuBkLICoyZlKQZNxDSoymIyoCJk2euT8m', 'dylan99@quicknet.nl', '', 1, '', '0000-00-00 00:00:00.000000');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -54,8 +54,8 @@ INSERT INTO `login` (`id`, `username`, `password`, `email`, `activation_code`, `
 --
 -- Indexen voor tabel `login`
 --
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`);
+  ALTER TABLE `login`
+    ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -64,9 +64,9 @@ ALTER TABLE `login`
 --
 -- AUTO_INCREMENT voor een tabel `login`
 --
-ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-COMMIT;
+  ALTER TABLE `login`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
