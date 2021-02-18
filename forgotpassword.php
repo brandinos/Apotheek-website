@@ -72,12 +72,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                 // Set current time
                                 $current_datetime = date('Y-m-d H:i:s');
                                 // Prepare an insert statement
-                                $sql2 = "INSERT INTO login (forgot_password_code, forgot_password_time) VALUES (?, ?)";
+                                $sql2 = "UPDATE login SET forgot_password_code = ?, forgot_password_time = ? WHERE email = ?";
                                 if($stmt = mysqli_prepare($conn, $sql2))
                                 {
                                     // Bind variables to the prepared statement as parameters
-                                    mysqli_stmt_bind_param($stmt, "ss", $param_random_hash, $param_current_datetime);
+                                    mysqli_stmt_bind_param($stmt, "sss", $param_random_hash, $param_current_datetime, $param_email);
                                     // Set parameters
+                                    $param_email = $email_v;
                                     $param_random_hash = password_hash($random_hash, PASSWORD_DEFAULT); // Creates a hash for the reset string
                                     $param_current_datetime = $current_datetime; 
                                 }
@@ -103,7 +104,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                         
                                         // Content
                                         $mail->isHTML(true);                                  // Set email format to HTML
-                                        $mail->Subject = 'Account verification';
+                                        $mail->Subject = 'Reset password';
                                         $mail->Body    = "http://localhost/example/Apotheek-website/resetpassword.php?passkey=$random_hash";
                                         // Send mail
                                         $mail->send();
