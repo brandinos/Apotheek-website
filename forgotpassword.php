@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		else
 		{
 			// Prepare a select statement
-            $sql1 = "SELECT id, email, activation_status FROM login WHERE username = ?";
+            $sql1 = "SELECT id, email, activation_status FROM login WHERE email = ?";
             if($stmt = mysqli_prepare($conn, $sql1))
 		    {
                 // Bind variables to the prepared statement as parameters
@@ -126,6 +126,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                         {
                             $email_err = "An email has been sent to this email address if an activated account exists for it";
                         }
+                    }
+                    else
+                    {
+                        $email_err = "An email has been sent to this email address if an activated account exists for it";
                     }     
                 }
             // Close statement
