@@ -37,10 +37,13 @@ if(empty(trim($_POST["email"])))
 		else
 		{
 			// Prepare a select statement
+            
+        }
+    }
 
 ?>
-<!DOCTYPE html>test
-<html lang="en">
+<!DOCTYPE html>
+<html lang="nl">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -82,3 +85,4 @@ if(empty(trim($_POST["email"])))
         </main>
         <?php include 'assets/includes/footer.php'?>
     </body>
+</html>

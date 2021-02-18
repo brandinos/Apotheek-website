@@ -1,4 +1,5 @@
 <?php
+include "config.php";
 // Initialize the session
 session_start();
  
@@ -78,34 +79,25 @@ else
                     Volg onze laatste niews, recht uit de databae. (ik heb hier
                     nog code van vorig jaar die we kunnen gebruiken)
                 </p>
-                <table style="width: 100%">
-                    <tr>
-                        <th>Het laatste nieuws:</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#"
-                                >Volgens de consumenten bond wijn zij de beste
-                                in vernieuing &RightArrow;</a
-                            >
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#"
-                                >Onze apotheek website is vernieuwd!
-                                &RightArrow;</a
-                            >
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#"
-                                >Apotheek Schut opent de deuren. &RightArrow;</a
-                            >
-                        </td>
-                    </tr>
-                </table>
+                <table>
+                <tr>
+                   <th>Nieuws</th>
+                    <th>Link</th>
+                </tr>
+             <?php
+            $sql = "SELECT NewsName,NewsDes FROM news";
+            $result = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($result) > 0){
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<tr>';
+                    echo '<td>'. $row['NewsName'] .'</td>';
+                    echo '<td>'. $row['NewsDes'] .'</td>';
+                    echo '</tr>';
+                }
+            }
+        ?>
+        </table>
             </section>
             <section>
                 <h3>Informatie</h3>
