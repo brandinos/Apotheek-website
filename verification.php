@@ -19,7 +19,7 @@ $sql3 = "UPDATE login SET activation_code = NULL WHERE activation_code = ?";
                 // Store result
                 mysqli_stmt_store_result($stmt);
                 
-                // Check if username exists, if yes then verify password
+                // Check if activation code exists
                 if(mysqli_stmt_num_rows($stmt) == 1)
 				{                    
                     // Bind result variables

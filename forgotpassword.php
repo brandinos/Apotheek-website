@@ -71,16 +71,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                 $random_hash = md5(uniqid(rand(), true));
                                 // Set current time
                                 $current_datetime = date('Y-m-d H:i:s');
+                                $expiration_datetime = date('Y-m-d H:i:s',strtotime('+30 minutes',strtotime($current_datetime)));
                                 // Prepare an insert statement
                                 $sql2 = "UPDATE login SET forgot_password_code = ?, forgot_password_time = ? WHERE email = ?";
                                 if($stmt = mysqli_prepare($conn, $sql2))
                                 {
                                     // Bind variables to the prepared statement as parameters
-                                    mysqli_stmt_bind_param($stmt, "sss", $param_random_hash, $param_current_datetime, $param_email);
+                                    mysqli_stmt_bind_param($stmt, "sss", $param_random_hash, $param_expiration_datetime, $param_email);
                                     // Set parameters
                                     $param_email = $email_v;
                                     $param_random_hash = password_hash($random_hash, PASSWORD_DEFAULT); // Creates a hash for the reset string
-                                    $param_current_datetime = $current_datetime; 
+                                    $param_expiration_datetime = $expiration_datetime; 
                                 }
                                 // Attempt to execute the prepared statement
                                 if(mysqli_stmt_execute($stmt))
@@ -105,19 +106,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                         // Content
                                         $mail->isHTML(true);                                  // Set email format to HTML
                                         $mail->Subject = 'Reset password';
-                                        $mail->Body    = "http://localhost/example/Apotheek-website/resetpassword.php?passkey=$random_hash";
+                                        $mail->Body    = "http://localhost/example/Apotheek-website/resetpassword.php?id=$id&passkey=$random_hash";
                                         // Send mail
                                         $mail->send();
-                                        echo 'Message has been sent';
+                                        $email_v = "An email has been sent to this email address if an activated account exists for it";
                                     } 
                                     catch (Exception $e) 
                                     {
-                                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                        $email_err = "Mail could not be sent: {$mail->ErrorInfo}";
                                     }
                                 }
                                 else
                                 {
-                                    $email_err = "An email has been sent to this email address if an activated account exists for it";
+                                    $email = "An email has been sent to this email address if an activated account exists for it";
                                 }
                                 // Redirect to login page
                                 /*
@@ -178,6 +179,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 						<label>E-Mail</label>
 						<input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
 						<span class="help-block"><?php echo $email_err; ?></span>
+                        <span class="help-block"><?php echo $email_v; ?></span>
 					</div>   
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary" value="Verstuur">
