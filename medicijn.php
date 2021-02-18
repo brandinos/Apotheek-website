@@ -48,25 +48,26 @@ else
         <main class="wrap">
          <section>
              <h3>Medicijn overzicht</h3>
+             <p>Zie hier onze medicijnen die wij aan u verkopen.<br><em>Let op: Ze staan in alfabetische volgorde.</em></p>
              <table>
                 <tr>
                     <th>Medicijn naam</th>
                     <th>Type medicijn</th>
                 </tr>
-             <?php
-            $sql = "SELECT medicineName,medicineDes FROM apotheek.medicines";
+                <?php
+            $sql = "SELECT * FROM medicines ORDER BY MedicineName ASC ";
             $result = mysqli_query($conn, $sql);
             if(mysqli_num_rows($result) > 0){
 
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo '<tr>';
-                    echo '<td>'. $row['medicineName'] .'</td>';
-                    echo '<td>'. $row['medicineDes'] .'</td>';
+                    echo '<td>'. $row['MedicineName'] .'</td>';
+                    echo '<td>'. $row['MedicineDes'] .'</td>';
                     echo '</tr>';
                 }
             }
         ?>
-        </table>
+            </table>
          <section>
         </main>
         <?php include 'assets/includes/footer.php'?>
