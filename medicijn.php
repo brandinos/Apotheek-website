@@ -1,4 +1,5 @@
 <?php
+include "config.php";
 // Initialize the session
 session_start();
  
@@ -47,36 +48,26 @@ else
         <main class="wrap">
          <section>
              <h3>Medicijn overzicht</h3>
-             <table style="width: 100%">
-                    <tr>
-                        <th>Medicijn naam</th>
-                        <th>Verkrijgbaar?</th>
-                    </tr>
-                    <tr>
-                        <td>
-                           Asperine
-                        </td>
-                        <td>
-                           ja
-                        </td>
-                    </tr>
-                    <tr>
-                    <td>
-                           Paraceta mol
-                        </td>
-                        <td>
-                           ja
-                        </td>
-                    </tr>
-                    <tr>
-                    <td>
-                           Morfine
-                        </td>
-                        <td>
-                           Nee
-                        </td>
-                    </tr>
-                </table>
+             <p>Zie hier onze medicijnen die wij aan u verkopen.<br><em>Let op: Ze staan in alfabetische volgorde.</em></p>
+             <table>
+                <tr>
+                    <th>Medicijn naam</th>
+                    <th>Type medicijn</th>
+                </tr>
+                <?php
+            $sql = "SELECT * FROM medicines ORDER BY MedicineName ASC ";
+            $result = mysqli_query($conn, $sql);
+            if(mysqli_num_rows($result) > 0){
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<tr>';
+                    echo '<td>'. $row['MedicineName'] .'</td>';
+                    echo '<td>'. $row['MedicineDes'] .'</td>';
+                    echo '</tr>';
+                }
+            }
+        ?>
+            </table>
          <section>
         </main>
         <?php include 'assets/includes/footer.php'?>
