@@ -62,7 +62,7 @@ $message_err = "";
             </div>   
             <div class="form-group <?php echo (!empty($message_err)) ? 'has-error' : ''; ?>">
                 <label>Bericht</label>
-                <textarea type="text" name="bericht" class="form-control" rows="4" value="<?php echo $message; ?>">
+                <input type="text" name="message" class="form-control" rows="4" value="<?php echo $message; ?>">
                 <span class="help-block"><?php echo $message_err; ?></span>
             </div>
             <div class="form-group">
