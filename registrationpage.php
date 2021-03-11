@@ -178,7 +178,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 				try 
 				{
 					//Server settings
-					$mail->SMTPDebug = 0;                      // Enable verbose debug output
+					$mail->SMTPDebug = 0;                                   // Enable verbose debug output
 					$mail->isSMTP();                                            // Send using SMTP
 					$mail->Host       = 'SMTP.office365.com';                    // Set the SMTP server to send through
 					$mail->SMTPAuth   = true;                                   // Enable SMTP authentication

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 18 feb 2021 om 11:12
--- Serverversie: 10.4.17-MariaDB
--- PHP-versie: 8.0.0
+-- Generation Time: Mar 11, 2021 at 11:29 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `login`
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `message_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `voornaam` varchar(64) NOT NULL,
+  `achternaam` varchar(64) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `bericht` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`message_id`, `account_id`, `voornaam`, `achternaam`, `email`, `bericht`) VALUES
+(1, 0, 'Dylan', 'Worseling', 'dylan99@quicknet.nl', 'jemoederhahahahahahagottemxdddddddddddddddddddddddddddddd'),
+(2, 0, 'Dyloe', 'Worstelaar', 'dylan99@quicknet.nl', 'qwpienfwoleinfghwp;oiejfp;woejfp;woejf'),
+(3, 0, 'Dylan', 'Worseling', 'dylan99@quicknet.nl', 'xfjgnvsodnfvgosledanfvgosledngefvlosengfsujlikejdnegf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
 --
 
 CREATE TABLE `login` (
@@ -39,18 +63,17 @@ CREATE TABLE `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `login`
+-- Dumping data for table `login`
 --
 
 INSERT INTO `login` (`id`, `username`, `password`, `email`, `activation_code`, `activation_status`, `forgot_password_code`, `forgot_password_time`) VALUES
 (7, 'haha', 'hihi', 'hoho', '', 0, '', '0000-00-00 00:00:00.000000'),
-(37, 'ItzDylan', '$2y$10$GXG6kpOHTKhtUYlZLHIfv.7mcQFLWUpoMUxlPOWJN9Hh./93fxpPu', 'dylan-dylan99@hotmail.com', '7fe24e6a9870ba2a4eb6731c26bd416c', 1, '', '0000-00-00 00:00:00.000000'),
-(46, 'qwerty', '$2y$10$kqz/26Gc4KN4/itBYgcAyuBkLICoyZlKQZNxDSoymIyoCJk2euT8m', 'dylan99@quicknet.nl', '', 1, '', '0000-00-00 00:00:00.000000');
+(46, 'qwerty', '$2y$10$PfH8frhTfTHsjsdRsytMze3Gk75YeZ/mAeSA5IULpN0LdnVfEYQWu', 'dylan99@quicknet.nl', '', 1, '$2y$10$KG9jZvg7Va/enFAM8WFe/uEGqom0K58pAJYzcxjLS09Bnbg3MOYrC', '2021-03-11 09:52:26.000000');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `medicines`
+-- Table structure for table `medicines`
 --
 
 CREATE TABLE `medicines` (
@@ -60,7 +83,7 @@ CREATE TABLE `medicines` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `medicines`
+-- Dumping data for table `medicines`
 --
 
 INSERT INTO `medicines` (`ID`, `MedicineName`, `MedicineDes`) VALUES
@@ -72,7 +95,7 @@ INSERT INTO `medicines` (`ID`, `MedicineName`, `MedicineDes`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE `news` (
@@ -82,7 +105,7 @@ CREATE TABLE `news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `news`
+-- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`ID`, `NewsName`, `NewsDes`) VALUES
@@ -90,36 +113,36 @@ INSERT INTO `news` (`ID`, `NewsName`, `NewsDes`) VALUES
 (2, 'Wij gaan bijna onze deuren openen.', '<a href=\"nieuwe.php\">Link</a>');
 
 --
--- Indexen voor geëxporteerde tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indexen voor tabel `login`
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`message_id`);
+
+--
+-- Indexes for table `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexen voor tabel `news`
---
-ALTER TABLE `news`
-  ADD PRIMARY KEY (`ID`);
-
---
--- AUTO_INCREMENT voor geëxporteerde tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT voor een tabel `login`
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
--- AUTO_INCREMENT voor een tabel `news`
---
-ALTER TABLE `news`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
