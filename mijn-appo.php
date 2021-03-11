@@ -13,6 +13,7 @@ require_once "config.php";
  
 // Define variables
 $username = "";
+$username_s = "";
 $password = "";
 $username_err = "";
 $password_err = "";
@@ -40,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     } else{
         $password = trim($_POST["password"]);
     }
-    
+    $username_s = $username;
     //Check for errors
     if(empty($username_err) && empty($password_err))
 	{

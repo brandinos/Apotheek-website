@@ -13,6 +13,7 @@ require_once "config.php";
  
 //Define variables
 $username = "";
+$username_s = "";
 $password = "";
 $username_err = "";
 $password_err = "";
@@ -68,6 +69,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 						mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $email, $activation_code, $activation_status);
 						if(mysqli_stmt_fetch($stmt))
 						{
+                            if(strcmp ($username , $username_s) == 0)
+                            {
 							//Check if the corresponding account is activated
 							if($activation_status == 1)
 							{
@@ -90,10 +93,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 									$password_err = "The password you entered was not valid.";
 							    }
 							}
-							else 
-							{
-								$username_err = "This account hasn't been activated yet!";
-						    } 
+                        }
+                        else
+                        {
+                             // Display an error message if username doesn't exist
+                             $username_err = "No account found with that username.";
+                        }
+                        }
+                        else
+                        {
+                            // Display an error message if username doesn't exist
+                            $username_err = "No account found with that username.";
+                        }
 						}
 						else
 						{
