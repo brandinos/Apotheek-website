@@ -42,7 +42,6 @@ else
 			{
 				include "assets/includes/navbar1.php";
 			}
-			include "assets/includes/header.php";
 		?>
 
         <main class="wrap">

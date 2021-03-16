@@ -177,6 +177,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <title>Apotheek Schut</title>
 </head>
 <body>
+<?php 
+			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
+			{
+				include "assets/includes/navbar.php";
+			}
+			else
+			{
+				include "assets/includes/navbar1.php";
+			}
+		?>
     <div class="wrap">
         <h2>Contact formulier</h2>
         <p>Kom in contact met ons. Vul dit formulier in.</p>
