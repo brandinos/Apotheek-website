@@ -44,6 +44,17 @@ else
 		?>
 
         <main class="wrap">
+             <!-- alert -->
+        <?php 
+			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
+			{
+				include "assets/includes/alert-not-loggedin.php";
+			}
+			else
+			{
+				include "assets/includes/alert-loggedin.php";
+			}
+		?>
            <h3>Diensten</h3>
            <p>De teams van Apotheek Schut staan graag klaar voor u. In onze dienstverlening staat u dan ook 
                centraal. We willen graag zekerheid en veel gemak beiden. Bij Apotheek Schut hebben wij daarom diverse 

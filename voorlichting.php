@@ -44,6 +44,17 @@ else
 		?>
 
         <main class="wrap">
+             <!-- alert -->
+        <?php 
+			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
+			{
+				include "assets/includes/alert-not-loggedin.php";
+			}
+			else
+			{
+				include "assets/includes/alert-loggedin.php";
+			}
+		?>
             <section>
                 <h3>Gezondsheidsinformatie</h3>
                 <p>In samenwerking met thuisarts.nl beiden wij u gezondsheid informatie. Wilt u 

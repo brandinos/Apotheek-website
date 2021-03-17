@@ -42,11 +42,24 @@ else
 			{
 				include "assets/includes/navbar1.php";
 			}
-			include "assets/includes/header.php";
 		?>
-
         <main class="wrap">
+        <!-- alert -->
+        <?php 
+			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
+			{
+				include "assets/includes/alert-not-loggedin.php";
+			}
+			else
+			{
+				include "assets/includes/alert-loggedin.php";
+			}
+		?>
             <section>
+                <?php include "assets/includes/header.php"; ?>
+           </section>
+            <section>
+                
                 <h1>Onze Service</h1>
                 <p>
                     Zoek dan niet veder! Wees verbaasd over onze
