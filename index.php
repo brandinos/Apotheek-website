@@ -45,14 +45,13 @@ session_start();
                 
                 <h1>Onze Service</h1>
                 <p>
-                    Zoek dan niet veder! Wees verbaasd over onze
-                    proffessionaliteit, en onze klanten service! Laat uw zelf
+                    Zoek dan niet verder! Laat uw zelf
                     verbazen door de ervaring en professionaliteit van de heer
-                    schut! <br />Wij staan u te woord doormidel van een team
+                    Schut! <br />Wij staan u te woord doormiddel van een team
                     hoogopgeleide specialisten die precies weten hoe zij u
-                    moeten helpen door hun jare lang ervaring. Wij zijn dan ook
-                    <b>gecertificeerd</b> als beste in de consumentenbond!
-                    <br />Bij onze appotheek geniet u van de beste:
+                    moeten helpen door hun jaren lange ervaring. Wij zijn dan ook
+                    <b>Gecertificeerd</b> als beste in de consumentenbond!
+                    <br />Bij onze apotheek vindt u het beste:
                 </p>
                 <div class="services">
                     <div class="services__container">Herhaal service</div>
@@ -63,8 +62,7 @@ session_start();
             <section class="news" id="news">
                 <h2>Het laaste nieuws</h2>
                 <p>
-                    Volg onze laatste niews, recht uit de databae. (ik heb hier
-                    nog code van vorig jaar die we kunnen gebruiken)
+                    Volg ons laatste nieuws, rechtstreeks uit onze database.
                 </p>
                 <table>
                 <tr>
@@ -88,10 +86,10 @@ session_start();
             </section>
             <section>
                 <h3>Informatie</h3>
-                <p>Vindt uit waneer wij geopend zijn.</p>
+                <p>Zie hier wanneer wij geopend zijn.</p>
                 <div class="openinfo">
                     <div class="openinfo__left">
-                        <h5>Openings tijden</h5>
+                        <h5>Openingstijden</h5>
                         <ul>
                             <li>Maandag 9:00 - 17:00</li>
                             <li>Dinsdag 9:00 - 17:00</li>
@@ -100,7 +98,7 @@ session_start();
                         </ul>
                     </div>
                     <div class="openinfo__right">
-                        <h5>Adress</h5>
+                        <h5>Adres</h5>
                         <ul>
                             <li>Koekjes straat, 4</li>
                             <li>1243 Te Schagen</li>

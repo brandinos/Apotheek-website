@@ -178,18 +178,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         }
     }
     // Check input errors before inserting in database
-    if(empty($username_err)&& empty($firstname_err) && empty($lastname_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($confirm_email_err)){
-        
+    if(empty($username_err)&& empty($firstname_err) && empty($lastname_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($confirm_email_err))
+    {
 		//Create validation hash
 		$random_hash = md5(uniqid(rand(), true));
         // Prepare an insert statement
-        $sql = "INSERT INTO login (username, voornaam, achternaam, password, email, activation_code) VALUES (?, ?, ?, ?, ?, ?)";
-         
+        $sql = "INSERT INTO login (username, voornaam, achternaam, password, email, activation_code) VALUES (?, ?, ?, ?, ?, ?)"; 
         if($stmt = mysqli_prepare($conn, $sql))
         {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ssssss", $param_username, $param_firstname, $param_lastname, $param_password, $param_email, $param_random_hash);
-            
             // Set parameters
             $param_username = $username;
             $param_firstname = $firstname;
@@ -263,8 +261,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 </head>
 <body>
     <div class="wrap">
-        <h2>Sign Up</h2>
-        <p>Please fill in this form to create an account.</p>
+        <h2>Registreren</h2>
+        <p>Vul het formulier in om een account aan te maken</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($firstname_err)) ? 'has-error' : ''; ?>">
                 <label>Voornaam</label>
@@ -277,7 +275,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <span class="help-block"><?php echo $lastname_err; ?></span>
             </div>      
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
+                <label>Gebruikersnaam</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
@@ -292,20 +290,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <span class="help-block"><?php echo $confirm_email_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
+                <label>Wachtwoord</label>
                 <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Bevestig Password</label>
+                <label>Bevestig Watchwoord</label>
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Maak account">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p>Already have an account? <a href="mijn-appo.php">Login here</a>.</p>
+            <p>Heeft u al een account? <a href="mijn-appo.php">Login</a>.</p>
         </form>
     </div> 
 <?php include 'assets/includes/footer.php'?>	

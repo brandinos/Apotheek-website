@@ -158,8 +158,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					</div>     
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary" value="Verstuur">
-					</div>
-					
+					</div>	
                 </form> 
                 <hr>
             </section>

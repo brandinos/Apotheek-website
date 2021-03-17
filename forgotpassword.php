@@ -1,14 +1,13 @@
 <?php
-//Connection file
+// Connection file
 require_once "config.php";
-//Import PhpMailer classes
+// Import PhpMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
-//Define mail variable
+// Define mail variable
 $mail = new PHPMailer(true);
- 
-//Define variables
+// Define variables
 $username = "";
 $email = "";
 $email_v = "";
@@ -46,16 +45,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		    {
                 // Bind variables to the prepared statement as parameters
                 mysqli_stmt_bind_param($stmt, "s", $param_email);
-            
                 // Set parameter
                 $param_email = $email;
-            
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt))
 			    {
 					// Store result
 					mysqli_stmt_store_result($stmt);
-                
 					// Check if email address exists, if yes then send email
 					if(mysqli_stmt_num_rows($stmt) == 1)
 					{                    
@@ -98,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
                                         $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
                                         
-                                        //Recipients
+                                        // Recipients
                                         $mail->setFrom('dylan-dylan99@hotmail.com', 'Dylan');
                                         $mail->addAddress($email_v);     // Add a recipient        // Name is optional
                                         
@@ -110,6 +106,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                                         $mail->send();
                                         $email_v = "An email has been sent to this email address if an activated account exists for it";
                                     } 
+                                    // Catch error
                                     catch (Exception $e) 
                                     {
                                         $email_err = "Mail could not be sent: {$mail->ErrorInfo}";
@@ -143,8 +140,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         mysqli_close($conn);
     }    
 }         
-?>
-       
+?>      
 <!DOCTYPE html>
 <html lang="nl">
     <head>

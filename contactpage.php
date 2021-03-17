@@ -1,7 +1,6 @@
 <?php
 // Initialize the session
 session_start();
- 
 // Check if the user is logged in
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 {
@@ -11,17 +10,15 @@ else
 {
 	echo "You're not logged in!";
 }
-//Connection file
+// Connection file
 require_once "config.php";
-
-//Import PhpMailer classes
+// Import PhpMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
-
+// Define mail variable
 $mail = new PHPMailer(true);
- 
-//Define variables
+// Define variables
 $firstname = "";
 $firstname_err = "";
 $email = "";
@@ -44,7 +41,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $firstname = trim($_POST["firstname"]);
     }
-
     // Validate lastname
     if(empty(trim($_POST["lastname"])))
     {
@@ -54,7 +50,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $lastname = trim($_POST["lastname"]);
     }
-
     //Validate email
 	if(empty(trim($_POST["email"])))
 	{
@@ -72,7 +67,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             $email = trim($_POST["email"]);   
 		}
     }
-
     // Validate message
     if(empty(trim($_POST["message"])))
     {
@@ -90,7 +84,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $message = trim($_POST["message"]);
     }
-
     // Check input errors before inserting in database
     if(empty($firstname_err) && empty($lastname_err) && empty($email_err) && empty($message_err))
     {
@@ -101,20 +94,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ssss", $param_firstname, $param_lastname, $param_email, $param_message);
-            
             // Set parameters
             $param_firstname = $firstname;
 			$param_email = $email;
 			$param_lastname = $lastname;
             $param_message = $message;
-            
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt))
 			{
                 // Send verification E-Mail
 				try 
 				{
-					//Server settings
+					// Server settings
 					$mail->SMTPDebug = 0;                      // Enable verbose debug output
 					$mail->isSMTP();                                            // Send using SMTP
 					$mail->Host       = 'SMTP.office365.com';                    // Set the SMTP server to send through
@@ -124,7 +115,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 					$mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-					//Recipients
+					// Recipients
 					$mail->setFrom('dylan-dylan99@hotmail.com', 'Dylan');
 					$mail->addAddress($_POST["email"]);     // Add a recipient        // Name is optional
 
@@ -136,6 +127,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					$mail->send();
 					echo 'Message has been sent';
 				} 
+                // Catch error
 				catch (Exception $e) 
 				{
 					echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -147,17 +139,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			{
                 echo "Something went wrong. Please try again later.";
             }
-
             // Close statement
             mysqli_stmt_close($stmt);
         }
     }
-    
     // Close connection
     mysqli_close($conn);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,7 +215,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p>Homepagina: <a href="index.php">Klik hier!</a></p>
         </form>
     </div> 
 <?php include 'assets/includes/footer.php'?>	
