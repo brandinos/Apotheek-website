@@ -260,7 +260,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <title>Apotheek Schut</title>
 </head>
 <body>
+<?php 
+		
+        include "assets/includes/navbar.php";
+?>
     <div class="wrap">
+    <br>
         <h2>Registreren</h2>
         <p>Vul het formulier in om een account aan te maken</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

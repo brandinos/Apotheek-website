@@ -160,6 +160,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <title>Apotheek Schut</title>
     </head>
 	<body>
+    <?php 
+		
+        include "assets/includes/navbar.php";
+    ?>
 	<main class="wrap">
             <section>
                 <h3>Wachtwoord vergeten?</h3>
