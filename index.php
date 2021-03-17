@@ -2,16 +2,6 @@
 include "config.php";
 // Initialize the session
 session_start();
- 
-// Check if the user is logged in
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
-{
-    echo "You're logged in! Welcome " .$_SESSION["username"];
-}
-else
-{
-	echo "You're not logged in!";
-}
 ?>
 
 <!DOCTYPE html>
@@ -34,14 +24,9 @@ else
     </head>
     <body>
         <?php 
-			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
-			{
+		
 				include "assets/includes/navbar.php";
-			}
-			else
-			{
-				include "assets/includes/navbar1.php";
-			}
+		
 		?>
         <main class="wrap">
         <!-- alert -->
@@ -90,7 +75,7 @@ else
                     <th>Link</th>
                 </tr>
              <?php
-            $sql = "SELECT NewsName,NewsDes FROM news";
+           $sql = "SELECT NewsName,NewsDes FROM news";
             $result = mysqli_query($conn, $sql);
             if(mysqli_num_rows($result) > 0){
 

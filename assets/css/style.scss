@@ -39,9 +39,9 @@
 }
 
 %box-shadow {
-  -webkit-box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.7);
-  -moz-box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.7);
-  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 2px 0px 15px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.7);
 }
 
 * {
@@ -76,13 +76,15 @@ body {
 
 header {
   min-height: 50vh;
-  margin: auto 0;
-  margin-top: 10rem;
 }
 
 section {
   /* Section heeft padding / ruimte voor meer wit ertussen in */
   padding: 2rem 0;
+}
+
+main {
+  margin-top: 5rem;
 }
 
 footer {
@@ -539,34 +541,29 @@ img {
 #welcome-section {
   height: 50vh;
   display: flex;
-  /* Flex direction to put welcome section h1 and p under each other instead of next to each other */
 
   align-items: center;
   justify-content: center;
-  /* Set welcome section too 100% of browser height */
-}
-.header__navbar {
-  border-top: 2px solid var(--light-primary);
-  padding: 0 0;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
 }
 .navbar {
-  max-width: 1366px;
-  margin: 0 auto;
+  @extend %box-shadow;
+  margin-bottom: 1rem;
+  height: 60px;
+  z-index: 9999;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: #333;
+  color: #fff;
   &__logo {
     margin: 0;
     padding: 1rem 0;
-    text-decoration: underline;
-    text-decoration-color: var(--lighter-gray);
-    text-decoration-thickness: 0.2em;
-    text-decoration-style: wavy;
   }
 
   &__links {
+    color: #fff;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -579,7 +576,7 @@ img {
   }
 
   &__links a {
-    color: var(--black);
+    color: #fff;
     text-align: center;
     display: block;
   }
@@ -600,6 +597,7 @@ img {
   .navbar {
     flex-direction: column;
     align-items: center;
+    padding: 0;
     .navbar {
       width: 80%;
       margin: 0 auto;

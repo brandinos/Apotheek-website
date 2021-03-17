@@ -32,6 +32,8 @@ else
         <title>Apotheek Schut</title>
     </head>
     <body>
+
+        <main class="wrap">
         <?php 
 			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
 			{
@@ -42,8 +44,6 @@ else
 				include "assets/includes/navbar1.php";
 			}
 		?>
-
-        <main class="wrap">
              <!-- alert -->
         <?php 
 			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
