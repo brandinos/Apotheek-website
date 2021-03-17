@@ -9,6 +9,10 @@ require 'vendor/autoload.php';
 $mail = new PHPMailer(true);
 // Define variables
 $username = "";
+$firstname = "";
+$firstname_err = "";
+$lastname = "";
+$lastname_err = "";
 $email = "";
 $email_v = "";
 $confirm_email = "";
@@ -22,13 +26,39 @@ $confirm_password_err = "";
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
+    // Validate firstname
+    if(empty(trim($_POST["firstname"])))
+    {
+        $firstname_err = "Please enter your first name.";
+    } 
+    elseif((preg_match("/^([a-zA-Z' ]+)$/",$firstname)))
+    {
+        $firstname_err = "A name must consist of only letters and whitespace";
+    }
+    else
+    {
+        $firstname = trim($_POST["firstname"]);  
+    }
+
+    // Validate lastname
+    if(empty(trim($_POST["lastname"])))
+    {
+        $lastname_err = "Please enter your last name.";
+    } 
+    elseif((preg_match("/^([a-zA-Z' ]+)$/",$lastname)))
+    {
+        $lastname_err = "A name must consist of only letters and whitespace";
+    }
+    else
+    {
+        $lastname = trim($_POST["lastname"]);  
+    }
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } else{
         // Prepare a select statement
         $sql = "SELECT id FROM login WHERE username = ?";
-        
         if($stmt = mysqli_prepare($conn, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
@@ -89,7 +119,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 				    else
 				    {
                         $email = trim($_POST["email"]);
-               
 			        }
 			    }   
 			    else
@@ -149,18 +178,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         }
     }
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($confirm_email_err))
-    {
-		// Create validation hash
+    if(empty($username_err)&& empty($firstname_err) && empty($lastname_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($confirm_email_err)){
+        
+		//Create validation hash
 		$random_hash = md5(uniqid(rand(), true));
         // Prepare an insert statement
-        $sql = "INSERT INTO login (username, password, email, activation_code) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO login (username, voornaam, achternaam, password, email, activation_code) VALUES (?, ?, ?, ?, ?, ?)";
+         
         if($stmt = mysqli_prepare($conn, $sql))
         {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_email, $param_random_hash);
+            mysqli_stmt_bind_param($stmt, "ssssss", $param_username, $param_firstname, $param_lastname, $param_password, $param_email, $param_random_hash);
+            
             // Set parameters
             $param_username = $username;
+            $param_firstname = $firstname;
+            $param_lastname = $lastname;
 			$param_email = $email;
 			$param_random_hash = $random_hash;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
@@ -171,7 +204,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 				try 
 				{
 					// Server settings
-					$mail->SMTPDebug = 0;                      // Enable verbose debug output
+					$mail->SMTPDebug = 0;                                   // Enable verbose debug output
 					$mail->isSMTP();                                            // Send using SMTP
 					$mail->Host       = 'SMTP.office365.com';                    // Set the SMTP server to send through
 					$mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -233,6 +266,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <h2>Sign Up</h2>
         <p>Please fill in this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($firstname_err)) ? 'has-error' : ''; ?>">
+                <label>Voornaam</label>
+                <input type="text" name="firstname" class="form-control" value="<?php echo $firstname; ?>">
+                <span class="help-block"><?php echo $firstname_err; ?></span>
+            </div>  
+            <div class="form-group <?php echo (!empty($lastname_err)) ? 'has-error' : ''; ?>">
+                <label>Achternaam</label>
+                <input type="text" name="lastname" class="form-control" value="<?php echo $lastname; ?>">
+                <span class="help-block"><?php echo $lastname_err; ?></span>
+            </div>      
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">

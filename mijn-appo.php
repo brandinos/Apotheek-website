@@ -11,6 +11,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 require_once "config.php";
 // Define variables
 $username = "";
+$username_s = "";
 $password = "";
 $username_err = "";
 $password_err = "";
@@ -35,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     } else{
         $password = trim($_POST["password"]);
     }
-    
+    $username_s = $username;
     //Check for errors
     if(empty($username_err) && empty($password_err))
 	{
@@ -135,7 +136,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			{
 				include "assets/includes/navbar1.php";
 			}
-			include "assets/includes/header.php";
 		?>
 
         <main class="wrap">

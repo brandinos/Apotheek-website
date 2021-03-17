@@ -30,6 +30,8 @@ else
         <title>Apotheek Schut</title>
     </head>
     <body>
+
+        <main class="wrap">
         <?php 
 			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
 			{
@@ -39,10 +41,18 @@ else
 			{
 				include "assets/includes/navbar1.php";
 			}
-			include "assets/includes/header.php";
 		?>
-
-        <main class="wrap">
+             <!-- alert -->
+        <?php 
+			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
+			{
+				include "assets/includes/alert-not-loggedin.php";
+			}
+			else
+			{
+				include "assets/includes/alert-loggedin.php";
+			}
+		?>
             <section>
                 <h3>Gezondsheidsinformatie</h3>
                 <p>In samenwerking met thuisarts.nl beiden wij u gezondsheid informatie. Wilt u 

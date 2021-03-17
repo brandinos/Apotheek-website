@@ -2,15 +2,6 @@
 include "config.php";
 // Initialize the session
 session_start();
-// Check if the user is logged in
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
-{
-    echo "You're logged in! Welcome " .$_SESSION["username"];
-}
-else
-{
-	echo "You're not logged in!";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,27 +23,27 @@ else
     </head>
     <body>
         <?php 
+		
+				include "assets/includes/navbar.php";
+		?>
+        <main class="wrap">
+        <!-- alert -->
+        <?php 
 			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
 			{
-				include "assets/includes/navbar.php";
+				include "assets/includes/alert-not-loggedin.php";
 			}
 			else
 			{
-				include "assets/includes/navbar1.php";
+				include "assets/includes/alert-loggedin.php";
 			}
-			include "assets/includes/header.php";
 		?>
-        <main class="wrap">
             <section>
+                <?php include "assets/includes/header.php"; ?>
+           </section>
+            <section>
+                
                 <h1>Onze Service</h1>
-                <figure>
-                    <img
-                        src="./assets/img/pharmasict-serving-customer-drug-store.jpg"
-                    />
-                    <figcaption>
-                        One mensen staan voor u klaar, zefs tijdens corona tijden!
-                    </figcaption>
-                </figure>
                 <p>
                     Zoek dan niet veder! Wees verbaasd over onze
                     proffessionaliteit, en onze klanten service! Laat uw zelf
@@ -81,7 +72,7 @@ else
                     <th>Link</th>
                 </tr>
              <?php
-            $sql = "SELECT NewsName,NewsDes FROM news";
+           $sql = "SELECT NewsName,NewsDes FROM news";
             $result = mysqli_query($conn, $sql);
             if(mysqli_num_rows($result) > 0){
 
@@ -118,6 +109,29 @@ else
                 </div>
             </section>
         </main>
+        <script>
+            var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+            </script>
         <?php include 'assets/includes/footer.php'?>
     </body>
 </html>
