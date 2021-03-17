@@ -25,15 +25,21 @@ $activation_status_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
     // Check if username field is empty
-    if(empty(trim($_POST["username"]))){
+    if(empty(trim($_POST["username"])))
+    {
         $username_err = "Please enter username.";
-    } else{
+    } 
+    else
+    {
         $username = trim($_POST["username"]);
     }
     // Check if password field is empty
-    if(empty(trim($_POST["password"]))){
+    if(empty(trim($_POST["password"])))
+    {
         $password_err = "Please enter your password.";
-    } else{
+    } 
+    else
+    {
         $password = trim($_POST["password"]);
     }
     $username_s = $username;
@@ -67,12 +73,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 								{
 									// Password is correct, so start a new session
 									session_start();
-                            
 									// Store data in session variables
 									$_SESSION["loggedin"] = true;
 									$_SESSION["id"] = $id;
 									$_SESSION["username"] = $username;                            
-                            
 									// Redirect user to welcome page
 									header("location: index.php");
 								} 
@@ -106,7 +110,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 }
     // Close connection
     mysqli_close($conn);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
