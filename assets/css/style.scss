@@ -57,26 +57,21 @@
 }
 
 html {
-  /* Responsive fonts gestolen van internet */
-  font-size: calc(16px + ((100vw - 600px) / 250));
-  text-decoration-skip-ink: "auto";
-  line-height: 1.953rem;
+  font-size: 1rem;
+  line-height: 1.7rem;
   margin: 0 auto;
   min-height: 100%;
-  /*geen scrol bar aan het einde van de pagina. */
   overflow-x: hidden;
   scroll-behavior: smooth;
-  max-width: 1140px;
+  max-width: 960px;
+  padding: 0 10px 0 10px;
 }
 
 body {
-  /* ook gestolen */
-  margin: calc((100vh / 25) * 1.563) calc((100vw / 25) * 1.563);
   background-color: var(--white);
   color: var(--black);
   /* kleur vor de cursor in bv. text fields. */
   caret-color: var(--black);
-  word-wrap: break-word;
 }
 
 header {
@@ -93,6 +88,7 @@ section {
 footer {
   margin-top: 2rem;
   padding: 1rem 0;
+  font-size: 75%;
   border-top: 1px solid var(--light-gray);
   color: var(--dark-gray);
 }
@@ -105,7 +101,7 @@ h5,
 h6 {
   margin-bottom: 1rem;
   margin-top: 1em;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 h1 {

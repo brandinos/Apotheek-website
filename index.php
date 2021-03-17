@@ -48,14 +48,6 @@ else
         <main class="wrap">
             <section>
                 <h1>Onze Service</h1>
-                <figure>
-                    <img
-                        src="./assets/img/pharmasict-serving-customer-drug-store.jpg"
-                    />
-                    <figcaption>
-                        One mensen staan voor u klaar, zefs tijdens corona tijden!
-                    </figcaption>
-                </figure>
                 <p>
                     Zoek dan niet veder! Wees verbaasd over onze
                     proffessionaliteit, en onze klanten service! Laat uw zelf
