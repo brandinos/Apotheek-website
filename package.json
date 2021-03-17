@@ -1,0 +1,31 @@
+{
+  "name": "apotheek-website",
+  "version": "2021.0.1",
+  "description": "Apotheek website",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch assets/css:assets/css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandinos/Apotheek-website.git"
+  },
+  "keywords": [
+    "apotheek",
+    "css",
+    "sass",
+    "html",
+    "css",
+    "php",
+    "phpmailer"
+  ],
+  "author": "Bradon, Thomas en Dylan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brandinos/Apotheek-website/issues"
+  },
+  "homepage": "https://github.com/brandinos/Apotheek-website#readme",
+  "dependencies": {
+    "sass": "^1.32.8"
+  }
+}
