@@ -32,7 +32,7 @@ $lastname = "";
 $lastname_err = "";
 $message = "";
 $message_err = "";
-
+// Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
     // Validate firstname

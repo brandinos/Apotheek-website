@@ -1,5 +1,7 @@
 <?php
+// Connection file
 require_once "config.php";
+// Define variables 
 $password = "";
 $password_err = "";
 $confirm_password = "";
@@ -8,113 +10,113 @@ $activation_status = "";
 $hashed_passkey = "";
 $current_datetime = "";
 $expiration_datetime = "";
-
+// Processing form data when its submitted
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-$passkey = $_GET['passkey'];
-$idkey = $_GET['id'];
-$sql1 = "SELECT activation_status, forgot_password_code, forgot_password_time FROM login WHERE id = ?";
-$sql2 = "UPDATE login SET forgot_password_code = NULL, forgot_password_time = NULL, password = ? WHERE id = ?";
-// Validate password
-if(empty(trim($_POST["password"])))
-{
-    $password_err = "Please enter a password.";     
-} 
-elseif(strlen(trim($_POST["password"])) < 6)
-{
-    $password_err = "Password must have atleast 6 characters.";
-}                           
-else
-{
-    $password = trim($_POST["password"]);
-}
-// Validate confirm password
-if(empty(trim($_POST["confirm_password"])))
-{
-    $confirm_password_err = "Please confirm password.";     
-}   
-else
-{
-    $confirm_password = trim($_POST["confirm_password"]);
-    if(empty($password_err) && ($password != $confirm_password))
+    // Define variables
+    $passkey = $_GET['passkey'];
+    $idkey = $_GET['id'];
+    // Prepare statements
+    $sql1 = "SELECT activation_status, forgot_password_code, forgot_password_time FROM login WHERE id = ?";
+    $sql2 = "UPDATE login SET forgot_password_code = NULL, forgot_password_time = NULL, password = ? WHERE id = ?";
+    // Validate password
+    if(empty(trim($_POST["password"])))
     {
-        $confirm_password_err = "Password did not match.";
+        $password_err = "Please enter a password.";     
+    } 
+    elseif(strlen(trim($_POST["password"])) < 6)
+    {
+        $password_err = "Password must have atleast 6 characters.";
+    }                           
+    else
+    {
+        $password = trim($_POST["password"]);
     }
-}
-if(empty($password_err) && empty($confirm_password_err))
-{
-    if($stmt = mysqli_prepare($conn, $sql1))
-	{
-        // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "s", $param_idkey);
-        // Set parameters
-        $param_passkey = $passkey;
-        $param_idkey = $idkey;
-        // Attempt to execute the prepared statement
-        if(mysqli_stmt_execute($stmt))
-		{
-            // Store result
-            mysqli_stmt_store_result($stmt); 
-
-            if(mysqli_stmt_num_rows($stmt) == 1)
-            {
-                // Bind result variables
-				mysqli_stmt_bind_result($stmt, $activation_status, $hashed_passkey, $expiration_datetime);
-				if(mysqli_stmt_fetch($stmt))
+    // Validate confirm password
+    if(empty(trim($_POST["confirm_password"])))
+    {
+        $confirm_password_err = "Please confirm password.";     
+    }   
+    else
+    {
+        $confirm_password = trim($_POST["confirm_password"]);
+        if(empty($password_err) && ($password != $confirm_password))
+        {
+            $confirm_password_err = "Password did not match.";
+        }
+    }
+    // Check for errors
+    if(empty($password_err) && empty($confirm_password_err))
+    {
+        if($stmt = mysqli_prepare($conn, $sql1))
+	    {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_idkey);
+            // Set parameters
+            $param_passkey = $passkey;
+            $param_idkey = $idkey;
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt))
+		    {
+                // Store result
+                mysqli_stmt_store_result($stmt); 
+                if(mysqli_stmt_num_rows($stmt) == 1)
                 {
-                    if($activation_status == 1)
+                    // Bind result variables
+				    mysqli_stmt_bind_result($stmt, $activation_status, $hashed_passkey, $expiration_datetime);
+				    if(mysqli_stmt_fetch($stmt))
                     {
-                        if(password_verify($passkey, $hashed_passkey))
+                        if($activation_status == 1)
                         {
-                            if(date('Y-m-d H:i:s') < $expiration_datetime)
+                            if(password_verify($passkey, $hashed_passkey))
                             {
-                                if($stmt = mysqli_prepare($conn, $sql2))
+                                if(date('Y-m-d H:i:s') < $expiration_datetime)
                                 {
-                                    mysqli_stmt_bind_param($stmt, "ss", $param_password, $param_idkey);
-
-                                    $param_password = password_hash($password, PASSWORD_DEFAULT);
-                                    // Attempt to execute the prepared statement
-                                    if(mysqli_stmt_execute($stmt))
-			                        {
-                                        $confirm_password_err = "Uw wachtwoord is gewijzigd!";
-                                    }
+                                    if($stmt = mysqli_prepare($conn, $sql2))
+                                    {
+                                        mysqli_stmt_bind_param($stmt, "ss", $param_password, $param_idkey);
+                                        $param_password = password_hash($password, PASSWORD_DEFAULT);
+                                        // Attempt to execute the prepared statement
+                                        if(mysqli_stmt_execute($stmt))
+			                            {
+                                            $confirm_password_err = "Uw wachtwoord is gewijzigd!";
+                                        }
+                                    }   
                                 }
-                                
+                                else
+                                {
+                                    $confirm_password_err = "Deze link is verlopen!";
+                                }
                             }
                             else
                             {
-                                $confirm_password_err = "Deze link is verlopen!";
+                                $confirm_password_err = "Deze link is ongeldig!";
                             }
                         }
                         else
                         {
-                            $confirm_password_err = "Deze link is ongeldig!";
-                        }
+                            $confirm_password_err = "Dit account is nog niet geactiveerd!";
+                        }    
                     }
                     else
                     {
-                        $confirm_password_err = "Dit account is nog niet geactiveerd!";
-                    }    
-                }
+                        $confirm_password_err = "foutje fetch";
+                    }
+                } 
                 else
                 {
-                    $confirm_password_err = "foutje fetch";
+                    $confirm_password_err = "Deze link is ongeldig!";
                 }
-            } 
+            }
             else
             {
-                $confirm_password_err = "Deze link is ongeldig!";
+                $confirm_password_err = "foutje execute";
             }
         }
-        else
-        {
-            $confirm_password_err = "foutje execute";
+        // Close statement
+        mysqli_stmt_close($stmt);
         }
-    }
-    // Close statement
-    mysqli_stmt_close($stmt);
-    }
-}         
+    }         
 ?>
 <!DOCTYPE html>
 <html lang="nl">

@@ -2,7 +2,6 @@
 include "config.php";
 // Initialize the session
 session_start();
- 
 // Check if the user is logged in
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 {
@@ -13,7 +12,6 @@ else
 	echo "You're not logged in!";
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,7 +42,6 @@ else
 			}
 			include "assets/includes/header.php";
 		?>
-
         <main class="wrap">
             <section>
                 <h1>Onze Service</h1>
@@ -72,7 +69,6 @@ else
                     <div class="services__container">Inschrijven</div>
                 </div>
             </section>
-
             <section class="news" id="news">
                 <h2>Het laaste nieuws</h2>
                 <p>

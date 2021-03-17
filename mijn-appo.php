@@ -7,10 +7,8 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
     header("location: index.php");
     exit;
 }
- 
 // Connection file for the database
 require_once "config.php";
- 
 // Define variables
 $username = "";
 $password = "";
@@ -21,19 +19,16 @@ $email_err = "";
 $activation_code = "";
 $activation_code_err = "";
 $activation_status = "";
-$activation_status_err = "";
- 
+$activation_status_err = ""; 
 // Processing form data when pressing the login button
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
- 
     // Check if username field is empty
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter username.";
     } else{
         $username = trim($_POST["username"]);
     }
-    
     // Check if password field is empty
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter your password.";
@@ -46,21 +41,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
         // Prepare a select statement
         $sql1 = "SELECT id, username, password, email, activation_code, activation_status FROM login WHERE username = ?";
-        
         if($stmt = mysqli_prepare($conn, $sql1))
 		{
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
             // Set parameter
             $param_username = $username;
-            
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt))
 			{
 					// Store result
 					mysqli_stmt_store_result($stmt);
-                
 					// Check if username exists, if yes then verify password
 					if(mysqli_stmt_num_rows($stmt) == 1)
 					{                    
@@ -92,30 +83,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 							}
 							else 
 							{
+                                // Display an errir message if the account hasn't been activated
 								$username_err = "This account hasn't been activated yet!";
 						    } 
 						}
 						else
 						{
-                    // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
-                    }
-				}
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-
+                        // Display an error message if username doesn't exist
+                        $username_err = "No account found with that username.";
+                        }
+				    }
+                } 
+                else
+                {
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
             // Close statement
             mysqli_stmt_close($stmt);
         }
 	}
- }
-    
+}
     // Close connection
     mysqli_close($conn);
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>

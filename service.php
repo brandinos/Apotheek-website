@@ -1,7 +1,6 @@
 <?php
 // Initialize the session
 session_start();
- 
 // Check if the user is logged in
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 {
@@ -12,7 +11,6 @@ else
 	echo "You're not logged in!";
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -43,7 +41,6 @@ else
 			}
 			include "assets/includes/header.php";
 		?>
-
         <main class="wrap">
            <h3>Diensten</h3>
            <p>De teams van Apotheek Schut staan graag klaar voor u. In onze dienstverlening staat u dan ook 

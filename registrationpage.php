@@ -1,15 +1,13 @@
 <?php
 //Connection file
 require_once "config.php";
-
-//Import PhpMailer classes
+// Import PhpMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
-
+// Define mail variable
 $mail = new PHPMailer(true);
- 
-//Define variables
+// Define variables
 $username = "";
 $email = "";
 $email_v = "";
@@ -21,7 +19,6 @@ $email_err = "";
 $confirm_email_err = "";
 $password_err = "";
 $confirm_password_err = "";
- 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -35,15 +32,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         if($stmt = mysqli_prepare($conn, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
-            
             // Set parameters
             $param_username = trim($_POST["username"]);
-            
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
-                /* store result */
+                // Store result
                 mysqli_stmt_store_result($stmt);
-                
                 if(mysqli_stmt_num_rows($stmt) == 1)
                 {
                     $username_err = "This username is already taken.";
@@ -61,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             mysqli_stmt_close($stmt);
         }
     }
-    //Validate email
+    // Validate email
 	if(empty(trim($_POST["email"])))
 	{
 		$email_err = "Please enter an E-Mail address";
@@ -75,44 +69,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		}
 		else
 		{
-			// Prepare a select statement
-        $sql = "SELECT id FROM login WHERE email = ?";
-        
-        if($stmt = mysqli_prepare($conn, $sql))
-		{
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_email);
-            
-            // Set parameters
-            $param_email = trim($_POST["email"]);
-            
-            // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt))
-			{
-                /* store result */
-                mysqli_stmt_store_result($stmt);
-                
-                if(mysqli_stmt_num_rows($stmt) == 1)
-				{
-                    $email_err = "This E-Mail address is already taken.";
-                } 
-				else
-				{
-                    $email = trim($_POST["email"]);
+		    // Prepare a select statement
+            $sql = "SELECT id FROM login WHERE email = ?";
+            if($stmt = mysqli_prepare($conn, $sql))
+		    {
+                // Bind variables to the prepared statement as parameters
+                mysqli_stmt_bind_param($stmt, "s", $param_email);
+                // Set parameters
+                $param_email = trim($_POST["email"]);
+                // Attempt to execute the prepared statement
+                if(mysqli_stmt_execute($stmt))
+			    {
+                    // Store result
+                    mysqli_stmt_store_result($stmt);
+                    if(mysqli_stmt_num_rows($stmt) == 1)
+				    {
+                        $email_err = "This E-Mail address is already taken.";
+                    } 
+				    else
+				    {
+                        $email = trim($_POST["email"]);
                
-			    }
-			}   
-			   else
-			{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-
-            // Close statement
-            mysqli_stmt_close($stmt);
-		}
-	}
-}
-	//Validate confirm email
+			        }
+			    }   
+			    else
+			    {
+                    echo "Oops! Something went wrong. Please try again later.";
+                }
+                // Close statement
+                mysqli_stmt_close($stmt);
+		    }
+	    }
+    }
+	// Validate confirm email
 	if(empty(trim($_POST["confirm_email"])))
 	{
 		$confirm_email_err = "Please confirm the E-Mail address";
@@ -133,51 +122,55 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		}
 	}
     // Validate password
-    if(empty(trim($_POST["password"]))){
+    if(empty(trim($_POST["password"])))
+    {
         $password_err = "Please enter a password.";     
-    } elseif(strlen(trim($_POST["password"])) < 6){
+    } 
+    elseif(strlen(trim($_POST["password"])) < 6)
+    {
         $password_err = "Password must have atleast 6 characters.";
-    } else{
+    } 
+    else
+    {
         $password = trim($_POST["password"]);
     }
     
     // Validate confirm password
-    if(empty(trim($_POST["confirm_password"]))){
+    if(empty(trim($_POST["confirm_password"])))
+    {
         $confirm_password_err = "Please confirm password.";     
-    } else{
+    } 
+    else
+    {
         $confirm_password = trim($_POST["confirm_password"]);
-        if(empty($password_err) && ($password != $confirm_password)){
+        if(empty($password_err) && ($password != $confirm_password))
+        {
             $confirm_password_err = "Password did not match.";
         }
     }
-	
-    
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($confirm_email_err)){
-        
-		//Create validation hash
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($confirm_email_err))
+    {
+		// Create validation hash
 		$random_hash = md5(uniqid(rand(), true));
         // Prepare an insert statement
         $sql = "INSERT INTO login (username, password, email, activation_code) VALUES (?, ?, ?, ?)";
-         
         if($stmt = mysqli_prepare($conn, $sql))
         {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_email, $param_random_hash);
-            
             // Set parameters
             $param_username = $username;
 			$param_email = $email;
 			$param_random_hash = $random_hash;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt))
 			{
                 // Send verification E-Mail
 				try 
 				{
-					//Server settings
+					// Server settings
 					$mail->SMTPDebug = 0;                      // Enable verbose debug output
 					$mail->isSMTP();                                            // Send using SMTP
 					$mail->Host       = 'SMTP.office365.com';                    // Set the SMTP server to send through
@@ -186,11 +179,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					$mail->Password   = '#Slacht99';                               // SMTP password
 					$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 					$mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-
-					//Recipients
+					// Recipients
 					$mail->setFrom('dylan-dylan99@hotmail.com', 'Dylan');
 					$mail->addAddress($_POST["email"]);     // Add a recipient        // Name is optional
-
 					// Content
 					$mail->isHTML(true);                                  // Set email format to HTML
 					$mail->Subject = 'Account verification';
@@ -199,6 +190,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					$mail->send();
 					echo 'Message has been sent';
 				} 
+                // Catch error
 				catch (Exception $e) 
 				{
 					echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -210,17 +202,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			{
                 echo "Something went wrong. Please try again later.";
             }
-
             // Close statement
             mysqli_stmt_close($stmt);
         }
     }
-    
     // Close connection
     mysqli_close($conn);
 }
 ?>
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>

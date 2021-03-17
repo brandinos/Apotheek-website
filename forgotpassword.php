@@ -1,12 +1,11 @@
 <?php
 //Connection file
 require_once "config.php";
-
 //Import PhpMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
-
+//Define mail variable
 $mail = new PHPMailer(true);
  
 //Define variables
@@ -24,7 +23,7 @@ $confirm_password_err = "";
 $activation_status = "";
 $activation_status_err = "";
 $current_datetime = "";
- 
+// Processing form data when form is submitted 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
     // Validate email address
@@ -142,7 +141,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         }   
         // Close connection
         mysqli_close($conn);
-
     }    
 }         
 ?>
@@ -184,7 +182,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary" value="Verstuur">
 					</div>
-					
                 </form> 
                 <hr>
             </section>
