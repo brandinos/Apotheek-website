@@ -2,15 +2,15 @@
 <section id="welcome-section">
 
       <div class="mySlides fade">
-        <img src="./assets/img/medicines.jpg" style="width:100%">
+        <img src="./assets/img/1.jpg" style="width:100%">
       </div>
 
       <div class="mySlides fade">
-        <img src="./assets/img/medicines.jpg" style="width:100%">
+        <img src="./assets/img/2.jpg" style="width:100%">
       </div>
 
       <div class="mySlides fade">
-        <img src="./assets/img/medicines.jpg" style="width:100%">
+        <img src="./assets/img/3.jpg" style="width:100%">
       </div>
 
 
