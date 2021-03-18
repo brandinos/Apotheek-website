@@ -16,7 +16,7 @@
                     <li><a href="medicijn.php">Medicijn overzicht</a></li>
                     <li><a href="voorlichting.php">Voorlichting</a></li>
                     <li><a href="mijn-appo.php">Mijn Appo</a></li>
-					<li><a href="contactpage.php">Contact</a></li>
+					<li><a href="contactpageguest.php">Contact</a></li>
                 </ul>
             </div>
         </nav>

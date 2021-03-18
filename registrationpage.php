@@ -39,7 +39,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $firstname = trim($_POST["firstname"]);  
     }
-
     // Validate lastname
     if(empty(trim($_POST["lastname"])))
     {
@@ -183,7 +182,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		//Create validation hash
 		$random_hash = md5(uniqid(rand(), true));
         // Prepare an insert statement
-        $sql = "INSERT INTO login (username, voornaam, achternaam, password, email, activation_code) VALUES (?, ?, ?, ?, ?, ?)"; 
+        $sql = "INSERT INTO login (username, firstname, lastname, password, email, activation_code) VALUES (?, ?, ?, ?, ?, ?)"; 
         if($stmt = mysqli_prepare($conn, $sql))
         {
             // Bind variables to the prepared statement as parameters
