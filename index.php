@@ -28,9 +28,15 @@ session_start();
                     <br />Bij onze apotheek vindt u het beste:
                 </p>
                 <div class="services">
-                    <div class="services__container">Herhaal service</div>
-                    <div class="services__container">Medicijn overzicht</div>
-                    <div class="services__container">Inschrijven</div>
+                    <a href="mijn-appo.php">
+                    <div class="services__container services__container--service">Herhaal service</div>
+                    </a>
+                    <a href="medicijn.php">
+                    <div class="services__container services__container--overzicht">Medicijn overzicht</div>
+                    </a>
+                    <a href="registrationpage.php">
+                    <div class="services__container services__container--inschrijven">Inschrijven</div>
+                    </a>
                 </div>
             </section>
             <section class="news" id="news">
