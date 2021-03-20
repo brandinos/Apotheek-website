@@ -122,7 +122,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <html lang="nl">
 <?php include "assets/includes/head.php" ?>
 	<body>
-	<main class="wrap">
+    <?php include "assets/includes/navbar.php"?>
+
+	<main>
             <section>
                 <h3>Verander uw wachtwoord</h3>
                 <p>Vul hier uw nieuwe wachtwoord in</p>
@@ -133,11 +135,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <form action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]); ?>" method="post">
 					<div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
 						<label>Nieuw wachtwoord</label>
+                        <br>
 						<input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
 						<span class="help-block"><?php echo $password_err; ?></span>
 					</div> 
                     <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
 						<label>Bevestig nieuw wachtwoord</label>
+                        <br>
 						<input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
 						<span class="help-block"><?php echo $confirm_password_err; ?></span>
 					</div>     

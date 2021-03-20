@@ -115,18 +115,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <html lang="en">
 <?php include "assets/includes/head.php" ?>
     <body>
-        <?php 
-			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
-			{
-				include "assets/includes/navbar.php";
-			}
-			else
-			{
-				include "assets/includes/navbar1.php";
-			}
-		?>
-
-        <main class="wrap">
+    <?php include "assets/includes/navbar.php"?>
+        <main>
             <section>
                 <h3>Mijn appo</h3>
                 <p>Wij hebben een persoonlijke omgeving voor klanten waar zij op kunnen inloggen. Zo kunt u zelf uw zaken regelen!</p>

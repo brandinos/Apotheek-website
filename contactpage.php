@@ -150,51 +150,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <!DOCTYPE html>
 <html lang="en">
 <?php include "assets/includes/head.php" ?>
-<body>
-<?php 
-			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
-			{
+    <body>
+        <?php 
+		
 				include "assets/includes/navbar.php";
-			}
-			else
-			{
-				include "assets/includes/navbar1.php";
-			}
 		?>
-        <br>
-        <br>
-    <div class="wrap">
-         <!-- alert -->
-         <?php 
-			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
-			{
-				include "assets/includes/alert-not-loggedin.php";
-			}
-			else
-			{
-				include "assets/includes/alert-loggedin.php";
-			}
-		?>
-        <h2>Contact formulier</h2>
+        <main>
+
+            <section>
+            <h2>Contact formulier</h2>
         <p>Kom in contact met ons. Vul dit formulier in.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($firstname_err)) ? 'has-error' : ''; ?>">
                 <label>Voornaam</label>
+                <br>
                 <input type="text" name="firstname" class="form-control" value="<?php echo $firstname; ?>">
                 <span class="help-block"><?php echo $firstname_err; ?></span>
             </div>  
             <div class="form-group <?php echo (!empty($lastname_err)) ? 'has-error' : ''; ?>">
                 <label>Achternaam</label>
+                <br>
                 <input type="text" name="lastname" class="form-control" value="<?php echo $lastname; ?>">
                 <span class="help-block"><?php echo $lastname; ?></span>
             </div>      
 			<div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label>Email</label>
+                <br>
                 <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
                 <span class="help-block"><?php echo $email_err; ?></span>
             </div>   
             <div class="form-group <?php echo (!empty($message_err)) ? 'has-error' : ''; ?>">
                 <label>Bericht</label>
+                <br>
                 <textarea type="text" name="message" class="form-control" rows="4" value="<?php echo $message; ?>"></textarea>
                 <span class="help-block"><?php echo $message_err; ?></span>
             </div>
@@ -203,7 +190,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
         </form>
-    </div> 
-<?php include 'assets/includes/footer.php'?>	
-</body>
+            </section>
+             
+        </main>
+        <?php include 'assets/includes/footer.php'?>
+    </body>
 </html>

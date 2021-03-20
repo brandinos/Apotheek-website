@@ -141,47 +141,10 @@ mysqli_close($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="preload"
-            href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
-            as="style"
-        />
-        <link
-            rel="stylesheet"
-            href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
-        />
-        <link rel="preload" href="./assets/css/style.css" as="style" />
-        <link rel="stylesheet" href="./assets/css/style.css" />
-        <title>Apotheek Schut</title>
-</head>
+<?php include "assets/includes/head.php" ?>
 <body>
-<?php 
-			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
-			{
-                include "assets/includes/navbar.php";
-			}
-			else
-			{
-                include "assets/includes/navbar1.php";
-			}
-            ?>
-        <br>
-        <br>
-    <div class="wrap">
-         <!-- alert -->
-         <?php 
-			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
-			{
-                include "assets/includes/alert-not-loggedin.php";
-			}
-			else
-			{
-                include "assets/includes/alert-loggedin.php";
-			}
-            ?>
+<?php include "assets/includes/navbar.php"?>
+    <div>
         <h2>Contact formulier</h2>
         <p>Kom in contact met ons. Vul dit formulier in.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

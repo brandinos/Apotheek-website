@@ -9,36 +9,15 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 }
 else
 {
-	echo "You're not logged in!";
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include "assets/includes/head.php" ?>
     <body>
-        <?php 
-			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
-			{
-				include "assets/includes/navbar.php";
-			}
-			else
-			{
-				include "assets/includes/navbar1.php";
-			}
-		?>
+    <?php include "assets/includes/navbar.php"?>
 
-        <main class="wrap">
-             <!-- alert -->
-        <?php 
-			if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == false)
-			{
-				include "assets/includes/alert-not-loggedin.php";
-			}
-			else
-			{
-				include "assets/includes/alert-loggedin.php";
-			}
-		?>
+        <main>
          <section>
              <h3>Medicijn overzicht</h3>
              <p>Zie hier onze medicijnen die wij aan u verkopen.<br><em>Let op: Ze staan in alfabetische volgorde.</em></p>
