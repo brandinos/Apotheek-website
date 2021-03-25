@@ -4,12 +4,8 @@ session_start();
 // Check if the user is logged in
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 {
-    echo "You're logged in! Welcome " .$_SESSION["username"];
     header("location: contactpageuser.php");
     exit;
-}
-else
-{
 }
 // Connection file
 require_once "config.php";
@@ -156,7 +152,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <body>
     <?php include "assets/includes/navbar.php"?>
     <div>
-
         <h2>Contact formulier</h2>
         <p>Kom in contact met ons. Vul dit formulier in.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

@@ -5,10 +5,14 @@ session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true)
 {
     echo "You're logged in! Welcome " .$_SESSION["username"];
+    header("location: contactpageuser.php");
+    exit;
 }
 else
 {
 	echo "You're not logged in!";
+    header("location: contactpageguest.php");
+    exit;
 }
 // Connection file
 require_once "config.php";
