@@ -4,7 +4,7 @@
     </div>
     <nav>
         <a href="index.php">Home</a>
-        <a href="service.php">service</a>
+        <a href="service.php">Service</a>
         <a href="medicijn.php">Medicijn overzicht</a>
         <a href="voorlichting.php">Voorlichting</a>
         <a href="mijn-appo.php">Mijn Appo</a>

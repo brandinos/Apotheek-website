@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $password = trim($_POST["password"]);
     }
     $username_s = $username;
-    //Check for errors
+    // Check for errors
     if(empty($username_err) && empty($password_err))
 	{
         // Prepare a select statement
@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 									$_SESSION["loggedin"] = true;
 									$_SESSION["id"] = $id;
 									$_SESSION["username"] = $username;                            
-									// Redirect user to welcome page
+									// Redirect user to homepage
 									header("location: index.php");
 								} 
 								else
@@ -108,8 +108,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         }
 	}
 }
-    // Close connection
-    mysqli_close($conn);
+// Close connection
+mysqli_close($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,7 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         <main>
             <section>
                 <h3>Mijn appo</h3>
-                <p>Wij hebben een persoonlijke omgeving voor klanten waar zij op kunnen inloggen. Zo kunt u zelf uw zaken regelen!</p>
+                <p>Wij hebben een persoonlijke omgeving voor klanten waar u op kunt inloggen. Zo kunt u zelf uw zaken regelen!</p>
             </section>
             <section>
                 <h5>Inloggen</h5>
@@ -138,7 +138,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					<div class="form-group">
 						<input type="submit" class="btn btn-primary" value="Login">
 					</div>
-					
                 </form> 
                 <hr>
                 <a href="forgotpassword.php">Wachtwoord vergeten?</a>

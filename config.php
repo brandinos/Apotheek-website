@@ -2,7 +2,7 @@
 // Define credentials
 define('DB_SERVER', 'localhost');	
 define('DB_USERNAME', 'root');	
-//define('DB_PASSWORD', 'P@ssw0rd');
+//define('DB_PASSWORD', 'P@ssw0rd');   // Brandon's database password (keep commented if its different for you and use the one below)
 define('DB_PASSWORD', '');	
 define('DB_NAME', 'apotheek');	
 // Attempt connection

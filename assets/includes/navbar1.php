@@ -12,7 +12,7 @@
                 </p>
                 <ul class="navbar__links">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="service.php">service</a></li>
+                    <li><a href="service.php">Service</a></li>
                     <li><a href="medicijn.php">Medicijn overzicht</a></li>
                     <li><a href="voorlichting.php">Voorlichting</a></li>
                     <li><a href="mijn-appo.php">Mijn Appo</a></li>

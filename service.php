@@ -16,8 +16,7 @@ session_start();
                     <li>Diabetes service.</li>
                     <li>Herhaal service</li>
                     <li>Uw medicijnen staan altijd klaar</li>
-                    <li>Verschilende instructies over mediijn gebruik</li>
-                    <li>Webshop</li>
+                    <li>Verschillende instructies over medicijn gebruik</li>
                 </ul>
                 <br>
             De online diensten van uw apotheek. Ga naar Diensten bij uw apotheek en kijk hoe wij u 

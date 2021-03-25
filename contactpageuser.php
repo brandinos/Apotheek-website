@@ -148,6 +148,7 @@ mysqli_close($conn);
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($message_err)) ? 'has-error' : ''; ?>">
                 <label>Bericht</label>
+                <br>
                 <textarea type="text" name="message" class="form-control" rows="4" value="<?php echo $message; ?>"></textarea>
                 <span class="help-block"><?php echo $message_err; ?></span>
             </div>
